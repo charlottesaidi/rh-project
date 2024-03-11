@@ -1,29 +1,25 @@
-import { Suspense } from "react";
-import Header from "../components/header/Header";
-import SideBar from "../components/sidebar/SideBar";
-import { Box, styled } from '@mui/material';
-import { Outlet } from "react-router-dom";
-import SuspenseLoader from "../components/common/SuspenseLoader";
-
-const Wrapper = styled(Box)({
-  display: 'flex',
-  margin: '64px 0 0 250px',
-});
+import React from "react";
+import AppLayout from "../layouts/AppLayout";
+import LoginLayout from "../layouts/LoginLayout";
+import {isTokenExpired, useToken} from "../service/auth";
+import {setAuthorization} from "../service/core";
 
 const Main = () => {
+  const { token } = useToken();
+
+  if (!token) {
+    return (
+      <LoginLayout/>
+    )
+  }
+
+  setAuthorization(token);
+
+  isTokenExpired(token);
+
   return (
-    <>
-      <Header />
-      <Wrapper>
-        <SideBar />
-        <Suspense fallback={<SuspenseLoader />} >
-          <Box>
-            <Outlet />
-          </Box>
-        </Suspense>
-      </Wrapper>
-    </>     
-  );
+    <AppLayout/>
+  )
 }
 
 export default Main;
