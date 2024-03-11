@@ -6,8 +6,10 @@ use App\Repository\DepartmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DepartmentRepository::class)]
-class Department
+class Department implements DatedInterface
 {
+    use DatedTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
