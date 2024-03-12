@@ -2,13 +2,15 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Department;
 use App\Entity\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class PostFixtures extends Fixture implements FixtureGroupInterface
+class PostFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     const DIRECTEUR_POSTE = 'Directeur';
     const RECRUTEUR_POSTE = 'Recruteur';
@@ -17,12 +19,19 @@ class PostFixtures extends Fixture implements FixtureGroupInterface
 
     public function __construct()
     {
-        $this->fakerFactory = \Faker\Factory::create('fr_FR');
+        $this->fakerFactory = \Faker\Factory::create('en_FR');
     }
 
     public static function getGroups(): array
     {
-        return ['post'];
+        return ['post, department'];
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            DepartmentFixtures::class,
+        ];
     }
 
     public static function getPostReference(string $key): string
@@ -41,12 +50,17 @@ class PostFixtures extends Fixture implements FixtureGroupInterface
             $entity = $this->createPost($data);
             $manager->persist($entity);
             $this->addReference(self::getPostManagerReference($entity->getName()), $entity);
+            /** @var Department $department */
+            $department = $this->getReference(DepartmentFixtures::getDepartmentManagerReference($data['department_id']));
+            $entity->setDepartment($department);
         }
 
+        $i = 0;
         foreach ($this->getData() as $data) {
             $entity = $this->createPost($data);
             $manager->persist($entity);
-            $this->addReference(self::getPostReference($entity->getName()), $entity);
+            $this->addReference(self::getPostReference((string)$i), $entity);
+            $i++;
         }
 
         $manager->flush();
@@ -72,17 +86,19 @@ class PostFixtures extends Fixture implements FixtureGroupInterface
     private function getManagerData(): iterable
     {
         yield [
-            'name' => self::DIRECTEUR_POSTE
+            'name' => self::DIRECTEUR_POSTE,
+            'department_id' => DepartmentFixtures::DEP_DIRECTION
         ];
         yield [
-            'name' => self::RECRUTEUR_POSTE
+            'name' => self::RECRUTEUR_POSTE,
+            'department_id' => DepartmentFixtures::DEP_RESSOURCES
         ];
     }
 
     private function getData(): iterable
     {
         $faker = $this->fakerFactory;
-        for ($i = 2; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             yield [
                 'name' => $faker->company
             ];

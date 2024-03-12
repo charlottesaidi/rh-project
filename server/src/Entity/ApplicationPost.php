@@ -28,6 +28,11 @@ class ApplicationPost implements DatedInterface
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Post $post = null;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

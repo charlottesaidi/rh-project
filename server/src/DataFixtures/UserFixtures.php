@@ -2,9 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Book\Book;
-use App\Entity\File;
-use App\Entity\Genre;
 use App\Entity\Post;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;

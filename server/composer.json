@@ -11,7 +11,7 @@
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.1",
-        "fzaninotto/faker": "^1.5",
+        "fakerphp/faker": "^1.23",
         "lexik/jwt-authentication-bundle": "^2.16",
         "nelmio/cors-bundle": "^2.2",
         "symfony/console": "6.4.*",

@@ -56,6 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, DatedIn
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->applicationPosts = new ArrayCollection();
     }
 

@@ -11,6 +11,13 @@ class Application implements DatedInterface
 {
     use DatedTrait;
 
+    const STATUS_PENDING = 'pending';
+    const STATUS_CONTACTED = 'contacted';
+    const STATUS_INTERVIEWED = 'interviewed';
+    const STATUS_TESTING = 'testing';
+    const STATUS_REJECTED = 'rejected';
+    const STATUS_ARCHIVED = 'archived';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -33,6 +40,12 @@ class Application implements DatedInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $destruction_date = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->setDestructionDate(new \DateTime('+2 years'));
+    }
 
     public function getId(): ?int
     {
