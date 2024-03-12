@@ -21,20 +21,21 @@ class ApplicationPostRepository extends ServiceEntityRepository
         parent::__construct($registry, ApplicationPost::class);
     }
 
-    //    /**
-    //     * @return ApplicationPost[] Returns an array of ApplicationPost objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+        /**
+         * @return ApplicationPost[] Returns an array of ApplicationPost objects
+         */
+        public function findByApplicationStatus($value): array
+        {
+            return $this->createQueryBuilder('a')
+                ->select('a, ap')
+                ->innerJoin('a.application', 'ap')
+                ->andWhere('ap.status = :val')
+                ->setParameter('val', $value)
+                ->orderBy('a.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
 
     //    public function findOneBySomeField($value): ?ApplicationPost
     //    {

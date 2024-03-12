@@ -14,7 +14,7 @@ class ApplicationFixtures extends Fixture
 
     public function __construct()
     {
-        $this->fakerFactory = \Faker\Factory::create('en_FR');
+        $this->fakerFactory = \Faker\Factory::create('fr_FR');
     }
 
     public static function getGroups(): array

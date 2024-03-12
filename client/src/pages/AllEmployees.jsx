@@ -1,30 +1,24 @@
-import { useState, useEffect } from 'react';
-import { Card, CardContent } from '@mui/material';
-import { getAllEmployees } from '../service/api';
+import {Alert, Box, styled} from "@mui/material";
 
+const Wrapper = styled(Box)({
+  display: 'flex',
+  padding: 50
+});
+
+const Container = styled(Box)({
+  margin: '0 50px',
+  '& > *': {
+    marginBottom: '20px !important'
+  }
+})
 const AllEmployees = () => {
-    const [employees, setEmployees] = useState([]);
-
-    useEffect(() => {
-        const getEmployeesData = async () => {
-            const result = await getAllEmployees();
-            setEmployees(result);
-        }
-        getEmployeesData();
-    }, [])
 
     return (
-        <>
-            {
-                employees?.map(employee => (
-                    <Card>
-                        <CardContent>
-                            Hello
-                        </CardContent>
-                    </Card>
-                ))       
-            }
-        </>
+      <Wrapper>
+        <Container>
+          <Alert severity="warning">A venir</Alert>
+        </Container>
+      </Wrapper>
     )
 }
 

@@ -19,7 +19,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface, Fixture
 
     public function __construct()
     {
-        $this->fakerFactory = \Faker\Factory::create('en_FR');
+        $this->fakerFactory = \Faker\Factory::create('fr_FR');
     }
 
     public static function getGroups(): array
@@ -100,7 +100,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface, Fixture
         $faker = $this->fakerFactory;
         for ($i = 0; $i < 10; $i++) {
             yield [
-                'name' => $faker->company
+                'name' => $faker->jobTitle
             ];
         }
     }

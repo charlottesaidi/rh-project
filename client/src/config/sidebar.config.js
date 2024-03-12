@@ -5,7 +5,7 @@ import { PersonAdd, ViewStream, HomeOutlined } from '@mui/icons-material';
 export const SIDEBAR_DATA = [
     {
         name: 'home',
-        title: 'Home',
+        title: 'Candidatures',
         icon: HomeOutlined,
         activeIcon: '',
         path: routes.main.path,
@@ -13,7 +13,7 @@ export const SIDEBAR_DATA = [
     },
     {
         name: 'addemployee',
-        title: 'Add Employee',
+        title: 'Publier une offre',
         icon: PersonAdd,
         activeIcon: '',
         path: routes.main.path,
@@ -21,7 +21,7 @@ export const SIDEBAR_DATA = [
     },
     {
         name: 'employees',
-        title: 'Employees',
+        title: 'Offres',
         icon: ViewStream,
         activeIcon: '',
         path: routes.main.path,

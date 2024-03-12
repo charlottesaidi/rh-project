@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Application;
+use App\Entity\ApplicationPost;
 use App\Service\ApiService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,13 +20,8 @@ class ApplicationController extends BaseController
     public function index(Request $request): JsonResponse
     {
         try {
-            $applicationRepository = $this->doctrine->getRepository(Application::class);
-
+            $applicationRepository = $this->doctrine->getRepository(ApplicationPost::class);
             $applications = $applicationRepository->findAll();
-
-            if(null == $applications) {
-                $applications = [];
-            }
 
             return $this->json($applications);
         } catch(throwable $e) {

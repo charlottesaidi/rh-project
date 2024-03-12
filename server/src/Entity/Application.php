@@ -41,6 +41,8 @@ class Application implements DatedInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $destruction_date = null;
 
+    private ApplicationPost $applicationPost;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -122,5 +124,10 @@ class Application implements DatedInterface
         $this->destruction_date = $destruction_date;
 
         return $this;
+    }
+
+    public function getApplicationPost(): ApplicationPost
+    {
+        return $this->applicationPost;
     }
 }
