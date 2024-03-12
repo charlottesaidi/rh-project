@@ -1,44 +1,36 @@
+import React, {useEffect} from "react";
+import { Box, styled } from '@mui/material';
+import {Core} from "../service/core";
 
-import { Box, Typography, styled } from '@mui/material';
-
-import Information from '../components/home/Information';
+const api = new Core();
 
 const Wrapper = styled(Box)({
     padding: '20px 50px'
 })
 
 const Home = () => {
-    return (
-        <Wrapper>
-            <Information
-                text="Wishes"
-            >
-                <Box>
-                    {
-                        
-                    }
-                </Box>
-            </Information>
-            <Information
-                text="Upcoming Holidays"
-            >
-                <Box>
-                    {
-                        
-                    }
-                </Box>
-            </Information>
-            <Information
-                text="Announcement"
-            >
-                <Box>
-                    {
-                        
-                    }
-                </Box>
-            </Information>
-        </Wrapper>
-    )
+  const [applications, setApplications] = React.useState();
+  const [error, setError] = React.useState();
+
+  useEffect(() => {
+    fetchApplications();
+  }, []);
+
+  const fetchApplications = async () => {
+    const response = await api.get('applications');
+    if (response.error) {
+      setError(response.error);
+    } else if (response.data) {
+      setApplications(response.data);
+    }
+    console.log(response)
+  };
+
+  return (
+      <Wrapper>
+        {/*<Board initialBoard={board} />*/}
+      </Wrapper>
+  )
 }
 
 export default Home;

@@ -21,9 +21,8 @@ const SideBarContent = () => {
             {
                 SIDEBAR_DATA.map(data => {
                     return (
-                        <>
-                            <NavLink 
-                                key={data.name} 
+                        <div key={data.name} >
+                            <NavLink
                                 to={`${routes.main.path}/${data.name}`}
                                 style={{ textDecoration: 'none', color: 'inherit' }}
                             >
@@ -36,7 +35,7 @@ const SideBarContent = () => {
                                 </ListItem>
                             </NavLink>
                             { data.headerRow && <StyledDivider light={true} />}
-                        </>  
+                        </div>
                     )
                 })
             }

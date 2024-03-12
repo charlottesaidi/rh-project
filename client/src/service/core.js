@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://localhost:35391/api';
+axios.defaults.baseURL = 'http://localhost:8000/api';
 axios.defaults.headers.get['Content-type'] = 'application/json, application/epub+zip';
 
 axios.interceptors.response.use((response) => {
@@ -44,6 +44,14 @@ const setAuthorization = (token) => {
 };
 
 class Core {
+  getAllEmployees = async () => {
+    try {
+      const response = await axios.get(`/employees`);
+      return response.data;
+    } catch (error) {
+      console.error('Error while calling the api ', error.message);
+    }
+  }
   /**
    * Fetches data from given url
    */
