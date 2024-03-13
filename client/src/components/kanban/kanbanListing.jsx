@@ -8,7 +8,7 @@ const KanbanListing = ({items, onDragStop}) => {
     let data = [];
 
     items.map((item) => {
-      data.push(
+      return data.push(
         {
           Id: item.application.id,
           Title: 'Email : ' + item.application.email,

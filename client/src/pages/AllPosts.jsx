@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import {
+  Alert,
   Box,
   styled,
 } from '@mui/material';
@@ -36,7 +37,9 @@ const AllPosts = () => {
         <Wrapper>
           <TableListing items={jobs}/>
         </Wrapper>
-        : 'Une erreur est survenue'
+        : error ?
+          <Alert severity="error">{error}</Alert>
+          : <Alert severity="warning">Quelque chose ne va pas</Alert>
       }
     </Wrapper>
   )
