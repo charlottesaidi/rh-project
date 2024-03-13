@@ -38,18 +38,14 @@ class ApplicationController extends BaseController
 
             if ($data['status'] === Application::STATUS_CONTACTED) {
                 $application->setStatus(Application::STATUS_REJECTED);
-            }
-
-            if ($data['status'] === Application::STATUS_REJECTED) {
+            } elseif ($data['status'] === Application::STATUS_REJECTED) {
                 $application->setStatus(Application::STATUS_CONTACTED);
-            }
-
-            if ($data['status'] === Application::STATUS_INTERVIEWED) {
+            } elseif ($data['status'] === Application::STATUS_INTERVIEWED) {
                 $application->setStatus(Application::STATUS_ARCHIVED);
-            }
-
-            if ($data['status'] === Application::STATUS_ARCHIVED) {
+            } elseif ($data['status'] === Application::STATUS_ARCHIVED) {
                 $application->setStatus(Application::STATUS_INTERVIEWED);
+            } else {
+                $application->setStatus($data['status']);
             }
 
             $applicationRepository->save($application, true);

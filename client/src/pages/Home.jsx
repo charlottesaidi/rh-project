@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import {
+  Alert,
   Box,
   styled,
 } from '@mui/material';
@@ -16,6 +17,7 @@ const Wrapper = styled(Box)({
 const Home = () => {
   const [applications, setApplications] = React.useState([]);
   const [error, setError] = React.useState();
+  const [message, setMessage] = React.useState(null);
 
   useEffect(() => {
     fetchApplications();
@@ -32,6 +34,11 @@ const Home = () => {
 
   const updateApplication = async (id, status) => {
     const response = await api.update('applications/' + id, {"status": status})
+    if (response.error) {
+      setError(response.error);
+    } else if (response.data) {
+      setMessage("La candidature a été déplacée dans la colonne " + response.data.status);
+    }
   }
 
   const handleDragStop = (e) => {
@@ -43,6 +50,10 @@ const Home = () => {
       <Wrapper>
         {applications ?
           <Wrapper>
+            {message ?
+              <Alert severity="success">{message}</Alert>
+              : ''
+            }
             <KanbanListing items={applications} onDragStop={handleDragStop}/>
           </Wrapper>
           : 'Une erreur est survenue'
