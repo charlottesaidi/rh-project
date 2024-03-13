@@ -8,7 +8,7 @@ const Dashboard = lazy(() => import('../pages/Dashboard'));
 
 const routes = {
     main: {
-        path: '/ems',
+        path: '',
         element: Main
     },
     home: {
@@ -28,7 +28,7 @@ const routes = {
         element: AllPosts
     },
     invalid: {
-        path: '/ems/*',
+        path: '/*',
         element: Main
     },
 }
