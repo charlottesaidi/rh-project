@@ -10,10 +10,10 @@ import KanbanListing from "../components/kanban/kanbanListing";
 const api = new Core();
 
 const Wrapper = styled(Box)({
-    padding: '20px 50px'
+  padding: '20px 50px'
 })
 
-const Home = () => {
+const Kanban = () => {
   const [applications, setApplications] = React.useState([]);
   const [error, setError] = React.useState();
 
@@ -31,15 +31,15 @@ const Home = () => {
   };
 
   return (
-      <Wrapper>
-        {applications ?
-          <Wrapper>
-            <KanbanListing items={applications}/>
-          </Wrapper>
-          : 'Une erreur est survenue'
-        }
-      </Wrapper>
+    <Wrapper>
+      {applications ?
+        <Wrapper>
+          <KanbanListing items={applications} />
+        </Wrapper>
+        : 'Une erreur est survenue'
+      }
+    </Wrapper>
   )
 }
 
-export default Home;
+export default Kanban;

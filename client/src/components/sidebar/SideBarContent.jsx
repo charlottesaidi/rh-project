@@ -15,7 +15,7 @@ const StyledDivider = styled(Divider)({
 const SideBarContent = () => {
 
     const { type } = useParams();
-    console.log(type);
+
     return (
         <List>
             {

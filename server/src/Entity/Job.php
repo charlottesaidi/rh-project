@@ -28,7 +28,7 @@ class Job implements DatedInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $end_date = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'jobs')]
     private ?Post $post = null;
 
     public function __construct()

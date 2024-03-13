@@ -3,7 +3,7 @@ import { lazy } from 'react';
 const Main = lazy(() => import('../pages/Main'));
 const Home = lazy(() => import('../pages/Home'));
 const AddEmployee = lazy(() => import('../pages/AddEmployee'));
-const AllEmployees = lazy(() => import('../pages/AllEmployees'));
+const AllPosts = lazy(() => import('../pages/AllPosts'));
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 
 const routes = {
@@ -19,13 +19,13 @@ const routes = {
         path: 'dashboard',
         element: Dashboard,
     },
-    addemployee: {
-        path: 'addemployee',
+    addoffer: {
+        path: 'addoffer',
         element: AddEmployee
     },
-    allemployees: {
-        path: 'employees',
-        element: AllEmployees
+    allposts: {
+        path: 'posts',
+        element: AllPosts
     },
     invalid: {
         path: '/ems/*',

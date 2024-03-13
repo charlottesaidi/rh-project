@@ -1,6 +1,6 @@
 
 import { routes } from "../routes/routes"
-import { PersonAdd, ViewStream, HomeOutlined } from '@mui/icons-material';
+import { AddCircleOutline, ViewStream, HomeOutlined } from '@mui/icons-material';
 
 export const SIDEBAR_DATA = [
     {
@@ -12,15 +12,15 @@ export const SIDEBAR_DATA = [
         headerRow: true,
     },
     {
-        name: 'addemployee',
+        name: 'addoffer',
         title: 'Publier une offre',
-        icon: PersonAdd,
+        icon: AddCircleOutline,
         activeIcon: '',
         path: routes.main.path,
         headerRow: false,
     },
     {
-        name: 'employees',
+        name: 'posts',
         title: 'Offres',
         icon: ViewStream,
         activeIcon: '',

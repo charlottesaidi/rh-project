@@ -4,6 +4,7 @@ import SuspenseLoader from './components/common/SuspenseLoader';
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route, Navigate } from 'react-router-dom';
 import { routes } from './routes/routes';
 import ErrorComponent from './components/common/ErrorComponent';
+import './App.css'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -12,8 +13,8 @@ const router = createBrowserRouter(
         <Route path={routes.main.path} element={<Navigate to={`${routes.main.path}/${routes.home.path}`} />} />
         <Route path={routes.main.path} element={<routes.main.element />} >
           <Route path={routes.home.path} element={<routes.home.element />} errorElement={<ErrorComponent />} />
-          <Route path={routes.addemployee.path} element={<routes.addemployee.element />} errorElement={<ErrorComponent />} />
-          <Route path={routes.allemployees.path} element={<routes.allemployees.element />} errorElement={<ErrorComponent />} />
+          <Route path={routes.addoffer.path} element={<routes.addoffer.element />} errorElement={<ErrorComponent />} />
+          <Route path={routes.allposts.path} element={<routes.allposts.element />} errorElement={<ErrorComponent />} />
           <Route path={routes.dashboard.path} element={<routes.dashboard.element />} errorElement={<ErrorComponent />} />
         </Route>
 
