@@ -30,11 +30,20 @@ const Home = () => {
     }
   };
 
+  const updateApplication = async (id, status) => {
+    const response = await api.update('applications/' + id, {"status": status})
+  }
+
+  const handleDragStop = (e) => {
+    updateApplication(e.data[0].Id, e.data[0].Status)
+    fetchApplications();
+  }
+
   return (
       <Wrapper>
         {applications ?
           <Wrapper>
-            <KanbanListing items={applications}/>
+            <KanbanListing items={applications} onDragStop={handleDragStop}/>
           </Wrapper>
           : 'Une erreur est survenue'
         }

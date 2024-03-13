@@ -28,4 +28,35 @@ class ApplicationController extends BaseController
             return $this->json($e->getMessage());
         }
     }
+
+    #[Route('/applications/{id}', name: 'api_applications_update')]
+    public function update(Application $application, Request $request): JsonResponse
+    {
+        $data = \json_decode($request->getContent(), true);
+        try {
+            $applicationRepository = $this->doctrine->getRepository(Application::class);
+
+            if ($data['status'] === Application::STATUS_CONTACTED) {
+                $application->setStatus(Application::STATUS_REJECTED);
+            }
+
+            if ($data['status'] === Application::STATUS_REJECTED) {
+                $application->setStatus(Application::STATUS_CONTACTED);
+            }
+
+            if ($data['status'] === Application::STATUS_INTERVIEWED) {
+                $application->setStatus(Application::STATUS_ARCHIVED);
+            }
+
+            if ($data['status'] === Application::STATUS_ARCHIVED) {
+                $application->setStatus(Application::STATUS_INTERVIEWED);
+            }
+
+            $applicationRepository->save($application, true);
+
+            return $this->json($application);
+        } catch(throwable $e) {
+            return $this->json($e->getMessage());
+        }
+    }
 }
