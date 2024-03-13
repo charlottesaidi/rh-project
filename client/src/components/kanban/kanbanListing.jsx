@@ -1,5 +1,6 @@
 import React from "react";
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from "@syncfusion/ej2-react-kanban";
+import moment from "moment";
 
 const KanbanListing = ({items, onDragStop}) => {
   const [kanbanData, setData] = React.useState([]);
@@ -14,7 +15,7 @@ const KanbanListing = ({items, onDragStop}) => {
           Title: 'Email : ' + item.application.email,
           Status: item.application.status,
           Summary: 'Nom : ' + item.application.name,
-          Priority: 'Low',
+          Priority: moment(item.application.createdAt).format('L'),
           Tags: item.post.name
         },
       )
@@ -32,7 +33,7 @@ const KanbanListing = ({items, onDragStop}) => {
         contentField: "Summary",
         headerField: "Title",
         enableTooltip: true,
-        tagsField: 'Tags'
+        tagsField: 'Tags',
       }}
       dragStop={(e) => onDragStop(e)}
     >
