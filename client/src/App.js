@@ -1,9 +1,9 @@
-import { Suspense, lazy } from 'react';
-import Dummy from './Dummy';
+import {Suspense, lazy, useState, useEffect} from 'react';
 import SuspenseLoader from './components/common/SuspenseLoader';
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route, Navigate } from 'react-router-dom';
 import { routes } from './routes/routes';
 import ErrorComponent from './components/common/ErrorComponent';
+import {Box, styled} from "@mui/material";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,11 +24,32 @@ const router = createBrowserRouter(
 )
 
 const App = () => {
+  const [isDarkened, setIsDarkened] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsDarkened(!isDarkened);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Suspense fallback={<SuspenseLoader />} >
+      {isDarkened && <Overlay/>}
       <RouterProvider router={router} />
     </Suspense>
   )
 }
+
+const Overlay = styled(Box)`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+`
 
 export default App;
