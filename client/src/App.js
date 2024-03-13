@@ -50,7 +50,7 @@ const Overlay = styled(Box)`
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
+    z-index: 1000000001;
 `
 
 export default App;
