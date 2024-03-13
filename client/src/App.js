@@ -29,14 +29,14 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsDarkened(!isDarkened);
-    }, 5000);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <Suspense fallback={<SuspenseLoader />} >
-      {isDarkened && <Overlay/>}
+      {isDarkened && <Overlay onClick={() => setIsDarkened(!isDarkened)}/>}
       <RouterProvider router={router} />
     </Suspense>
   )
@@ -48,8 +48,8 @@ const Overlay = styled(Box)`
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
 `
 
 export default App;
