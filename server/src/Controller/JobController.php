@@ -27,4 +27,21 @@ class JobController extends BaseController
             return $this->json($e->getMessage());
         }
     }
+
+    #[Route('/jobs/{id]/delete', name: 'api_jobs')]
+    public function delete(Job $job, Request $request): JsonResponse
+    {
+        $response = new JsonResponse();
+
+        try {
+            $jobRepository = $this->doctrine->getRepository(Job::class);
+            $jobRepository->remove($job, true);
+
+            $response->setContent("Offre supprimée avec succès") ;
+        } catch(throwable $e) {
+            $response->setContent($e->getMessage());
+        }
+
+        return $response;
+    }
 }

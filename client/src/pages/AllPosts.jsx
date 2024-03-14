@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import {
+  Alert,
   Box,
   styled,
 } from '@mui/material';
@@ -16,6 +17,7 @@ const Wrapper = styled(Box)({
 const AllPosts = () => {
   const [jobs, setJobs] = React.useState([]);
   const [error, setError] = React.useState();
+  const [message, setMessage] = React.useState(null);
 
   useEffect(() => {
     fetchJobs();
@@ -30,11 +32,24 @@ const AllPosts = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    const response = await api.delete('/jobs/' + id + '/delete');
+    if (response.error) {
+      setError(response.error);
+    } else if (response.data) {
+      setMessage(response.data);
+    }
+  }
+
   return (
     <Wrapper>
       {jobs ?
         <Wrapper>
-          <TableListing items={jobs}/>
+          {message ?
+            <Alert severity="success">{message}</Alert>
+            : ''
+          }
+          <TableListing items={jobs} handleDelete={handleDelete}/>
         </Wrapper>
         : 'Une erreur est survenue'
       }

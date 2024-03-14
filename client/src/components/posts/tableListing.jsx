@@ -3,7 +3,7 @@ import moment from "moment/moment";
 import {BsPencilSquare, BsFillTrashFill} from "react-icons/bs";
 import React from "react";
 
-const TableListing = ({items}) => {
+const TableListing = ({items, handleDelete}) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -31,10 +31,10 @@ const TableListing = ({items}) => {
               <TableCell align="left">
                 <div>
                   <Button>
-                    <BsPencilSquare/>
+                    <BsPencilSquare />
                   </Button>
                   <Button>
-                    <BsFillTrashFill/>
+                    <BsFillTrashFill onClick={handleDelete(item.id)}/>
                   </Button>
                 </div>
               </TableCell>
