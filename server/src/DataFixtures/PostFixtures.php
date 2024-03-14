@@ -55,11 +55,14 @@ class PostFixtures extends Fixture implements DependentFixtureInterface, Fixture
             $entity->setDepartment($department);
         }
 
-        $i = 0;
+        $i = 2;
         foreach ($this->getData() as $data) {
             $entity = $this->createPost($data);
             $manager->persist($entity);
             $this->addReference(self::getPostReference((string)$i), $entity);
+            /** @var Department $department */
+            $department = $this->getReference(DepartmentFixtures::getDepartmentReference($data['department_id']));
+            $entity->setDepartment($department);
             $i++;
         }
 
@@ -98,9 +101,10 @@ class PostFixtures extends Fixture implements DependentFixtureInterface, Fixture
     private function getData(): iterable
     {
         $faker = $this->fakerFactory;
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 2; $i < 10; $i++) {
             yield [
-                'name' => $faker->jobTitle
+                'name' => $faker->jobTitle,
+                'department_id' => $i
             ];
         }
     }

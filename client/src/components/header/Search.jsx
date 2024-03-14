@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import { InputBase, List, ListItem, Box, styled } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { InputBase, Box, styled } from '@mui/material';
 
 const SearchContainer = styled(Box)`
   border-radius: 5px;
@@ -17,21 +16,14 @@ const SearchIconWrapper = styled(Box)`
   color: #A9A9A9;
 `;
 
-const ListWrapper = styled(List)`
-  position: absolute;
-  color: #000;
-  background: #FFFFFF;
-  margin-top: 36px;
-`;
-
 const InputSearchBase = styled(InputBase)`
   width: 100%;
   padding-left: 5px;
 `;
 
 const Search = () => {
-  const [text, setText] = useState();
-  const [open, setOpen] = useState(true)
+  const [setText] = useState();
+  const [setOpen] = useState(true)
 
   const getText = (text) => {
     setText(text);

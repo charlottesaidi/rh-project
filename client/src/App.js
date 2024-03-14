@@ -1,4 +1,4 @@
-import {Suspense, lazy, useState, useEffect} from 'react';
+import {Suspense, useState, useEffect} from 'react';
 import SuspenseLoader from './components/common/SuspenseLoader';
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route, Navigate } from 'react-router-dom';
 import { routes } from './routes/routes';
@@ -33,7 +33,7 @@ const App = () => {
     }, 15000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isDarkened]);
 
   return (
     <Suspense fallback={<SuspenseLoader />} >

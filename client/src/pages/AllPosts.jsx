@@ -51,7 +51,9 @@ const AllPosts = () => {
           }
           <TableListing items={jobs} handleDelete={handleDelete}/>
         </Wrapper>
-        : 'Une erreur est survenue'
+        : error ?
+          <Alert severity="error">{error}</Alert>
+          : <Alert severity="warning">Quelque chose ne va pas</Alert>
       }
     </Wrapper>
   )

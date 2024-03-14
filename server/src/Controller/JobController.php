@@ -18,14 +18,18 @@ class JobController extends BaseController
     #[Route('/jobs', name: 'api_jobs')]
     public function index(Request $request): JsonResponse
     {
+        $response = new JsonResponse();
+
         try {
             $jobRepository = $this->doctrine->getRepository(Job::class);
             $jobs = $jobRepository->findAll();
 
-            return $this->json($jobs);
+            $response->setContent($this->api->handleCircularReference($jobs)) ;
         } catch(throwable $e) {
-            return $this->json($e->getMessage());
+            $response->setContent($e->getMessage());
         }
+
+        return $response;
     }
 
     #[Route('/jobs/{id]/delete', name: 'api_jobs')]
