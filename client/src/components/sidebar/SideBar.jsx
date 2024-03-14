@@ -1,8 +1,23 @@
-
+import React from "react";
 import { Drawer } from "@mui/material";
 import SideBarContent from "./SideBarContent";
 
 const SideBar = () => {
+    const [background, setBackground] = React.useState('#445A6F');
+
+    React.useEffect(() => {
+      const interval = setInterval(() => {
+        blink()
+      }, 10000);
+
+      return () => clearInterval(interval);
+    }, []);
+
+    const blink = () => {
+      setInterval(() => {
+        setBackground(prev => (prev === '#445A6F' ? '#32CD32' : '#445A6F'));
+      }, 100);
+    }
 
     return (
         <Drawer
@@ -19,7 +34,7 @@ const SideBar = () => {
                     maxWidth: '250px',
                     height: 'calc(100vh - 64px)',
                     marginTop: '64px',
-                    background: '#445A6F'
+                    background: background
                 },
             }}
         >

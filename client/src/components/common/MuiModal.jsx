@@ -40,15 +40,6 @@ Backdrop.propTypes = {
   open: PropTypes.bool,
 };
 
-const blue = {
-  200: '#99CCFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0066CC',
-};
-
 const grey = {
   50: '#F3F6F9',
   100: '#E5EAF2',
