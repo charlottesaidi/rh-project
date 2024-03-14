@@ -1,7 +1,15 @@
-import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Button, Paper, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import moment from "moment/moment";
 import {BsPencilSquare, BsFillTrashFill} from "react-icons/bs";
 import React from "react";
+
+const DeleteButton = styled(Button)`
+    cursor: default;
+    opacity: .5;
+    &:hover {
+        background: transparent;
+    }
+`
 
 const TableListing = ({items, handleDelete}) => {
   return (
@@ -31,11 +39,11 @@ const TableListing = ({items, handleDelete}) => {
               <TableCell align="left">
                 <div>
                   <Button>
-                    <BsPencilSquare />
+                    <BsPencilSquare color={"red"} />
                   </Button>
-                  <Button>
-                    <BsFillTrashFill onClick={handleDelete(item.id)}/>
-                  </Button>
+                  <DeleteButton>
+                    <BsFillTrashFill color={"green"} onClick={() => handleDelete(item.id)}/>
+                  </DeleteButton>
                 </div>
               </TableCell>
             </TableRow>

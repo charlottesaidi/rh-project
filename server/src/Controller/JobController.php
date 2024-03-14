@@ -32,7 +32,7 @@ class JobController extends BaseController
         return $response;
     }
 
-    #[Route('/jobs/{id]/delete', name: 'api_jobs')]
+    #[Route('/jobs/{id}/delete', name: 'api_jobs_delete')]
     public function delete(Job $job, Request $request): JsonResponse
     {
         $response = new JsonResponse();

@@ -34,16 +34,20 @@ const AllPosts = () => {
 
   const handleDelete = async (id) => {
     const response = await api.delete('/jobs/' + id + '/delete');
+
     if (response.error) {
       setError(response.error);
     } else if (response.data) {
       setMessage(response.data);
+      fetchJobs();
     }
   }
 
   return (
     <Wrapper>
-      {jobs ?
+      {error ?
+        <Alert severity="error">{error}</Alert>
+        :
         <Wrapper>
           {message ?
             <Alert severity="success">{message}</Alert>
@@ -51,9 +55,6 @@ const AllPosts = () => {
           }
           <TableListing items={jobs} handleDelete={handleDelete}/>
         </Wrapper>
-        : error ?
-          <Alert severity="error">{error}</Alert>
-          : <Alert severity="warning">Quelque chose ne va pas</Alert>
       }
     </Wrapper>
   )
