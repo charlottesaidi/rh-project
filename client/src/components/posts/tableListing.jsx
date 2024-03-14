@@ -41,6 +41,7 @@ const TableListing = ({items, handleDelete}) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Poste</TableCell>
+              <TableCell align="left">Service</TableCell>
               <TableCell align="left">Description</TableCell>
               <TableCell align="left">Date de début</TableCell>
               <TableCell align="left">Date de fin</TableCell>
@@ -56,6 +57,7 @@ const TableListing = ({items, handleDelete}) => {
                 }}
               >
                 <TableCell component="th" scope="row">{item.post.name}</TableCell>
+                <TableCell component="th" scope="row">{item.post.department.name}</TableCell>
                 <TableCell align="left">{item.title}</TableCell>
                 <TableCell align="left">{gregToChineseDate(item.startDate)}</TableCell>
                 <TableCell align="left">{gregToChineseDate(item.endDate)}</TableCell>

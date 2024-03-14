@@ -37,6 +37,7 @@ const KanbanListing = ({items, onDragStop}) => {
         headerField: "Title",
         enableTooltip: true,
         tagsField: 'Tags',
+        footerTemplate: 'Priority'
       }}
       dragStop={(e) => onDragStop(e)}
     >
