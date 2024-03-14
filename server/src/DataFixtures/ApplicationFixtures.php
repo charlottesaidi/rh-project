@@ -71,6 +71,7 @@ class ApplicationFixtures extends Fixture
             };
 
             yield [
+                'phone' => $faker->phoneNumber,
                 'file' => $faker->md5 . '.pdf',
                 'email' => $faker->email,
                 'name' => $faker->name,

@@ -35,17 +35,31 @@ class ApplicationPostFixtures extends Fixture implements DependentFixtureInterfa
     public function load(ObjectManager $manager): void
     {
         $i = 0;
-        foreach ($this->getData() as $data) {
+        foreach ($this->getManagerData() as $data) {
             $entity = $this->createApplicationPost($data);
             $manager->persist($entity);
             $this->addReference(self::getApplicationPostReference((string)$i), $entity);
+            /** @var Post $post */
+            $post = $this->getReference(PostFixtures::getPostManagerReference($data['post_id']));
+            $entity->setPost($post);
+            /** @var Application $application */
+            $application = $this->getReference(ApplicationFixtures::getApplicationReference($data['application_id']));
+            $entity->setApplication($application);
+            $i++;
+        }
+
+        $y = 2;
+        foreach ($this->getData() as $data) {
+            $entity = $this->createApplicationPost($data);
+            $manager->persist($entity);
+            $this->addReference(self::getApplicationPostReference((string)$y), $entity);
             /** @var Post $post */
             $post = $this->getReference(PostFixtures::getPostReference($data['post_id']));
             $entity->setPost($post);
             /** @var Application $application */
             $application = $this->getReference(ApplicationFixtures::getApplicationReference($data['application_id']));
             $entity->setApplication($application);
-            $i++;
+            $y++;
         }
 
         $manager->flush();
@@ -68,8 +82,19 @@ class ApplicationPostFixtures extends Fixture implements DependentFixtureInterfa
         return $entity;
     }
 
+    private function getManagerData(): iterable {
+        yield [
+            'post_id' => PostFixtures::RECRUTEUR_POSTE,
+            'application_id' => 0
+        ];
+        yield [
+            'post_id' => PostFixtures::DIRECTEUR_POSTE,
+            'application_id' => 1
+        ];
+    }
+
     private function getData(): iterable {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 2; $i < 10; $i++) {
             yield [
                 'post_id' => $i,
                 'application_id' => $i

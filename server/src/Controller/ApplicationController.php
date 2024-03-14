@@ -19,14 +19,18 @@ class ApplicationController extends BaseController
     #[Route('/applications', name: 'api_applications')]
     public function index(Request $request): JsonResponse
     {
+        $response = new JsonResponse();
+
         try {
             $applicationRepository = $this->doctrine->getRepository(ApplicationPost::class);
             $applications = $applicationRepository->findAll();
 
-            return $this->json($applications);
+            $response->setContent($this->api->handleCircularReference($applications)) ;
         } catch(throwable $e) {
-            return $this->json($e->getMessage());
+            $response->setContent($e->getMessage());
         }
+
+        return $response;
     }
 
     #[Route('/applications/{id}', name: 'api_applications_update')]

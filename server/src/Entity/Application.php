@@ -43,6 +43,9 @@ class Application implements DatedInterface
 
     private ApplicationPost $applicationPost;
 
+    #[ORM\Column(length: 255)]
+    private ?string $phone = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -129,5 +132,15 @@ class Application implements DatedInterface
     public function getApplicationPost(): ApplicationPost
     {
         return $this->applicationPost;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): void
+    {
+        $this->phone = $phone;
     }
 }

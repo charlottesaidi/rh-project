@@ -6,16 +6,20 @@ const KanbanListing = ({items, onDragStop}) => {
 
   React.useEffect(() => {
     let data = [];
+    console.log(items)
 
     items.map((item) => {
       return data.push(
         {
           Id: item.application.id,
-          Title: 'Email : ' + item.application.email,
+          Title: item.post.name,
           Status: item.application.status,
-          Summary: 'Nom : ' + item.application.name,
+          Summary: '<span class="e-icons e-medium e-people"></span> ' + item.application.name +
+            '<br/><span class="e-icons e-medium e-send"></span> ' + item.application.email +
+            '<br/>' + item.application.phone +
+            '<br/><a href="#"><span class="e-icons e-large e-export-pdf"></span> CV</a>',
           Priority: 'Low',
-          Tags: item.post.name
+          Tags: item.post.department.name
         },
       )
     })

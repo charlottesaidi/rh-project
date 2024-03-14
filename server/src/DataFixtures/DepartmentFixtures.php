@@ -42,10 +42,12 @@ class DepartmentFixtures extends Fixture
             $this->addReference(self::getDepartmentManagerReference($entity->getName()), $entity);
         }
 
+        $y = 2;
         foreach ($this->getData() as $data) {
             $entity = $this->createDepartment($data);
             $manager->persist($entity);
-            $this->addReference(self::getDepartmentReference($entity->getName()), $entity);
+            $this->addReference(self::getDepartmentReference((string)$y), $entity);
+            $y++;
         }
 
         $manager->flush();
@@ -80,11 +82,25 @@ class DepartmentFixtures extends Fixture
 
     private function getData(): iterable
     {
-        $faker = $this->fakerFactory;
+        $departments = $this->getDepartmentNames();
         for ($i = 2; $i < 10; $i++) {
             yield [
-                'name' => $faker->company
+                'name' => $departments[$i]
             ];
         }
+    }
+
+    private function getDepartmentNames(): array
+    {
+        return [
+            2 => 'Comptabilité',
+            3 => 'Support Technique',
+            4 => 'Marketing',
+            5 => 'Entretien',
+            6 => 'Développement',
+            7 => 'Administration',
+            8 => 'Achat',
+            9 => 'Juridique'
+        ];
     }
 }
