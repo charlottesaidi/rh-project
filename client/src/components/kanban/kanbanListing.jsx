@@ -1,12 +1,12 @@
 import React from "react";
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from "@syncfusion/ej2-react-kanban";
+import moment from "moment";
 
 const KanbanListing = ({items, onDragStop}) => {
   const [kanbanData, setData] = React.useState([]);
 
   React.useEffect(() => {
     let data = [];
-    console.log(items)
 
     items.map((item) => {
       return data.push(
@@ -18,7 +18,7 @@ const KanbanListing = ({items, onDragStop}) => {
             '<br/><span class="e-icons e-medium e-send"></span> ' + item.application.email +
             '<br/>' + item.application.phone +
             '<br/><a href="#"><span class="e-icons e-large e-export-pdf"></span> CV</a>',
-          Priority: 'Low',
+          Priority: moment(item.application.createdAt).format('L'),
           Tags: item.post.department.name
         },
       )
@@ -36,7 +36,7 @@ const KanbanListing = ({items, onDragStop}) => {
         contentField: "Summary",
         headerField: "Title",
         enableTooltip: true,
-        tagsField: 'Tags'
+        tagsField: 'Tags',
       }}
       dragStop={(e) => onDragStop(e)}
     >

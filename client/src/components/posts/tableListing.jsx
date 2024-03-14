@@ -10,10 +10,12 @@ import {
   TableHead,
   TableRow
 } from "@mui/material";
-import moment from "moment/moment";
 import {BsPencilSquare, BsFillTrashFill} from "react-icons/bs";
 import React from "react";
 import MuiModal from "../common/MuiModal";
+import {CalendarChinese} from "date-chinese";
+
+let cal = new CalendarChinese();
 
 const DeleteButton = styled(Button)`
     cursor: default;
@@ -26,6 +28,12 @@ const DeleteButton = styled(Button)`
 const TableListing = ({items, handleDelete}) => {
   const [open, setOpen] = React.useState(false);
   const openModal = () => setOpen(true);
+
+  const gregToChineseDate = (date) => {
+    const chineseDate = cal.fromDate(new Date(date))
+    return `${chineseDate.day}/${chineseDate.month}/${chineseDate.year}`
+  }
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -49,8 +57,8 @@ const TableListing = ({items, handleDelete}) => {
               >
                 <TableCell component="th" scope="row">{item.post.name}</TableCell>
                 <TableCell align="left">{item.title}</TableCell>
-                <TableCell align="left">{moment(item.startDate).format('L')}</TableCell>
-                <TableCell align="left">{moment(item.endDate).format('L')}</TableCell>
+                <TableCell align="left">{gregToChineseDate(item.startDate)}</TableCell>
+                <TableCell align="left">{gregToChineseDate(item.endDate)}</TableCell>
                 <TableCell align="left">
                   <div>
                     <Button>
