@@ -26,10 +26,14 @@ class Post implements DatedInterface
     #[ORM\OneToMany(targetEntity: Job::class, mappedBy: 'post')]
     private Collection $jobs;
 
+    #[ORM\OneToMany(targetEntity: ApplicationPost::class, mappedBy: 'post')]
+    private Collection $applicationPosts;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->jobs = new ArrayCollection();
+        $this->applicationPosts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -57,6 +61,36 @@ class Post implements DatedInterface
     public function setDepartment(?Department $department): static
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ApplicationPost>
+     */
+    public function getApplicationPosts(): Collection
+    {
+        return $this->applicationPosts;
+    }
+
+    public function addApplicationPost(ApplicationPost $applicationPost): static
+    {
+        if (!$this->applicationPosts->contains($applicationPost)) {
+            $this->applicationPosts->add($applicationPost);
+            $applicationPost->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplicationPost(ApplicationPost $applicationPost): static
+    {
+        if ($this->applicationPosts->removeElement($applicationPost)) {
+            // set the owning side to null (unless already changed)
+            if ($applicationPost->getCreatedBy() === $this) {
+                $applicationPost->setCreatedBy(null);
+            }
+        }
 
         return $this;
     }

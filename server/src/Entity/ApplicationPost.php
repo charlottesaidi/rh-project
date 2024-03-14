@@ -25,7 +25,7 @@ class ApplicationPost implements DatedInterface
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Application $application = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'applicationPosts')]
     private ?Post $post = null;
 
     public function __construct()

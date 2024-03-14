@@ -62,6 +62,20 @@ class ApplicationPostFixtures extends Fixture implements DependentFixtureInterfa
             $y++;
         }
 
+        $x = 12;
+        foreach ($this->getData() as $data) {
+            $entity = $this->createApplicationPost($data);
+            $manager->persist($entity);
+            $this->addReference(self::getApplicationPostReference((string)$x), $entity);
+            /** @var Post $post */
+            $post = $this->getReference(PostFixtures::getPostReference($data['post_id']));
+            $entity->setPost($post);
+            /** @var Application $application */
+            $application = $this->getReference(ApplicationFixtures::getApplicationReference((string)$x));
+            $entity->setApplication($application);
+            $x++;
+        }
+
         $manager->flush();
     }
 
