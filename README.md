@@ -7,6 +7,9 @@ Api created with Symfony 6.4.
 #### `cd server && composer install`
 Install composer dependencies
 
+#### `symfony console console lexik:jwt:generate-keypair`
+Generate ssl key pair
+
 #### `symfony console doctrine:database:create`
 #### `&& symfony console doctrine:migrations:migrate`
 Create database and tables.
