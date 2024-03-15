@@ -130,8 +130,9 @@ const LoginLayout = () => {
               mb: 2,
               position: "absolute",
               ...buttonStyle,
-              width: "200px", // Modifier la largeur du bouton selon votre préférence
-              height: "50px" // Modifier la hauteur du bouton selon votre préférence
+              width: "200px",
+              height: "50px",
+              transition: "all 0.3s ease"
             }}
             onMouseMove={handleMouseMove}
           >
