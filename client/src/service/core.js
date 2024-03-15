@@ -44,6 +44,9 @@ const setAuthorization = (token) => {
 };
 
 class Core {
+  getServerUrl = () => {
+    return 'http://localhost:8000'
+  }
   getAllEmployees = async () => {
     try {
       const response = await axios.get(`/employees`);

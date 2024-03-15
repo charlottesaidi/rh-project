@@ -1,6 +1,9 @@
 import React from "react";
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from "@syncfusion/ej2-react-kanban";
 import moment from "moment";
+import {Core} from "../../service/core";
+
+const api = new Core();
 
 const KanbanListing = ({items, onDragStop}) => {
   const [kanbanData, setData] = React.useState([]);
@@ -17,7 +20,7 @@ const KanbanListing = ({items, onDragStop}) => {
           Summary: '<span class="e-icons e-medium e-people"></span> ' + item.application.name +
             '<br/><span class="e-icons e-medium e-send"></span> ' + item.application.email +
             '<br/>' + item.application.phone +
-            '<br/><a href="#"><span class="e-icons e-large e-export-pdf"></span> CV</a>',
+            '<br/><a href="' + api.getServerUrl() + '/uploads/cvs/sample_cv.pdf" download target="_blank"><span class="e-icons e-large e-export-pdf"></span> CV</a>',
           Priority: moment(item.application.createdAt).format('L'),
           Tags: item.post.department.name
         },
